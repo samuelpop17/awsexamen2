@@ -1,0 +1,69 @@
+﻿@model List<Evento>
+
+@{
+    string UrlBucket = keysModel.bucket;
+    var categorias = ViewData["categorias"] as List<CategoriaEvento>;
+}
+
+<form method="post">
+    <label>Selecciona una categorias</label>
+    <select name="id">
+        @foreach (CategoriaEvento cat in categorias)
+        {
+            <option value="@cat.IdCategoria">@cat.Nombre</option>
+        }
+    </select>
+    <button class="btn btn-outline-primary">
+        Probar
+    </button>
+</form>
+
+
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    idevento
+                </th>
+                <th>
+                    nombre
+                </th>
+                <th>
+                    imagen
+                </th>
+                <th>
+                    artista
+                </th>
+                <th>
+                    idcategoria
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Idevento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        <img src="@UrlBucket@item.Imagen" width="250px" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Artista)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdCategoria)
+                    </td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+}
